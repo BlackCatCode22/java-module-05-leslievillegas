@@ -1,0 +1,124 @@
+1. Overview of the ZooApp Program
+ The program reads data from two files: animalNames.txt and arrivingAnimals.txt. It outputs a list of animals with their details and their species count.
+
+2. Functionality
+Main Function (main)
+The original main function was designed to:
+
+Print a welcome message.
+
+Create lists for storing animal information and species counts.
+
+Read from two files (animalNames.txt for animal names and arrivingAnimals.txt for animal details).
+
+Display animal names.
+
+Process incoming animals, assigning them names from the lists and adding them to a species count.
+
+However, the original code lacked some functionality:
+
+Animal names weren't read correctly. It didn’t correctly load animal names from the animalNames.txt file.
+
+Species counts weren't handled correctly in terms of identifying how many animals of each species were processed.
+
+Data Structures in the Original Code:
+List of animals: A List<Animal> was used to store the arriving animals.
+
+Map for species counts: A Map<String, Integer> was used to track the number of animals per species.
+
+3. New Additions and Updates
+Key Changes:
+Handling Animal Names from the File
+
+Problem: The original code didn’t read and populate the animal names correctly.
+
+Solution: Used a method (createAnimalNameLists) that reads from the animalNames.txt file, extracts names for each species, and stores them in a LinkedList for each species (Hyena, Lion, Tiger, Bear).
+
+Experiment: The experiment was to ensure the program correctly identifies and stores animal names in a structured way based on species.
+
+Class for Animal Name Lists (AnimalNameListsWrapper)
+
+Problem: The original code had no structure for storing the animal names in separate lists for each species.
+
+Solution: Created a new class AnimalNameListsWrapper to hold the lists for each species (Hyena, Lion, Tiger, Bear). This was done to make the code more organized and to ensure each species’ names were easily accessible.
+
+Experiment: The experiment was the use of this wrapper class to group related data (names for each species) together.
+
+Processing Arriving Animals
+
+Problem: The original code had issues when processing incoming animals, especially when extracting details like species and assigning names.
+
+Solution: Used a regular expression (regex) to extract animal details (age, species, and gender) from each line in the arrivingAnimals.txt file. The regex matches the pattern X year old Y species.
+
+Experiment: Experimented with regex to match specific parts of the animal details, which helped to parse the data more efficiently.
+
+Use of Switch Statements and Species-Specific Name Assignment
+
+Problem: In the original code, assigning names to species was hardcoded and not dynamic.
+
+Solution: Used a switch statement to assign names from the species-specific lists to the arriving animals. This ensures that the correct name is given to each species.
+
+Experiment: The experiment was to make the assignment of names more dynamic, using the switch statement and maintaining the order of names for each species.
+
+File Output
+
+Problem: The original code did not handle file output well.
+
+Solution: Added a function to generate and write a report that lists all animals in the zoo by species, including their names and ages, to a file named newAnimals.txt.
+
+Experiment: The experiment here was writing output in a more organized way, grouping animals by species and including both their name and age.
+
+4. Components, Data Structures, and Interactions
+Components:
+ZooApp: The main driver class that controls the flow of the program, processes the input files, and generates the output.
+
+Animal: A parent class that holds general attributes (name, age, species) for each animal.
+
+Species-Specific Animal Classes (Hyena, Lion, Tiger, Bear): Inherit from the Animal class and represent specific species of animals.
+
+AnimalNameListsWrapper: A class to store LinkedLists for each species' names.
+
+Utilities: A helper class containing the method for reading the animalNames.txt file and creating lists of names for each species.
+
+Data Structures:
+List<Animal> animals: Stores all arriving animals, each represented as an instance of a subclass of Animal.
+
+Map<String, Integer> speciesCount: Maps species names (e.g., "Hyena") to the count of how many animals of that species have arrived.
+
+LinkedList<String> hyenaNames, lionNames, tigerNames, bearNames: These lists store the names for each species, read from the animalNames.txt file.
+
+Interactions:
+ZooApp -> AnimalNameListsWrapper: The ZooApp class uses the createAnimalNameLists method in the Utilities class to retrieve the lists of animal names for each species.
+
+ZooApp -> Animal: The ZooApp class processes arriving animals, assigns them names using the species lists, and creates Animal objects.
+
+Animal -> AnimalNameListsWrapper: The individual animal species (e.g., Hyena, Lion) get their names from the corresponding lists in the AnimalNameListsWrapper class.
+
+ZooApp -> Map<String, Integer> speciesCount: As animals are processed, their species count is updated in the speciesCount map.
+
+5. Changes and Results
+Original Version:
+Lacked dynamic name assignment from a file.
+
+Did not correctly read or process the animalNames.txt file.
+
+Had minimal handling for animal details and species counting.
+
+Updated Version:
+Animal names are now dynamically read from animalNames.txt and assigned to animals as they arrive.
+
+Regex is used to extract and process animal details like age, gender, and species from the arrivingAnimals.txt file.
+
+A wrapper class (AnimalNameListsWrapper) is used to organize species names into different lists.
+
+The program now outputs a formatted report of animal names, ages, and species counts to a file.
+
+Experimentation and Improvements:
+The program experimented with regular expressions for extracting data.
+
+It experimented with using a wrapper class (AnimalNameListsWrapper) to better manage species names.
+
+The program dynamically assigns names to animals as they arrive, instead of relying on hardcoded values.
+
+6. Conclusion
+The updated version of the ZooApp program handles animal names and details more effectively and organizes the program's logic into clearer, more manageable components. The use of regular expressions and a wrapper class for animal names was an effective experiment that greatly improved the program's ability to manage and process data. I have also made it into one file instead of it referencing two other files for the classes. I still have trouble getting the additional species information to render with the corresponding names but I'll try to keep fixing my code.
